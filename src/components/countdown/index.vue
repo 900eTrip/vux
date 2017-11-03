@@ -1,5 +1,5 @@
 <template>
-  <span>{{currentTime}}</span>
+  <span>{{countdown}}</span>
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
     start: {
       type: Boolean,
       default: true
+    },
+    format: {
+      type: String,
+      default: 'mm:ss'
     }
   },
   created () {
@@ -22,6 +26,21 @@ export default {
       this.interval = setInterval(function () {
         if (_this.currentTime > 0) {
           _this.currentTime--
+          if (_this.format === 'ss') {
+            _this.countdown = _this.currentTime
+          } else if (_this.format === 'mm:ss') {
+            let mm = Math.floor(_this.currentTime / 60)
+            let ss = _this.currentTime - mm * 60
+            mm = mm < 10 ? '0' + mm : mm
+            _this.countdown = mm + ':' + ss
+          } else if (_this.format === 'hh:mm:ss') {
+            let hh = Math.floor(_this.currentTime / 3600)
+            let mm = Math.floor((_this.currentTime - hh * 3600) / 60)
+            let ss = _this.currentTime - mm * 60
+            hh = hh < 10 ? '0' + hh : hh
+            mm = mm < 10 ? '0' + mm : mm
+            _this.countdown = hh + ':' + mm + ':' + ss
+          }
         } else {
           _this.stop()
           _this.index++
@@ -58,7 +77,8 @@ export default {
     return {
       interval: null,
       index: 0,
-      currentTime: 60
+      currentTime: 60,
+      countdown: ''
     }
   }
 }
