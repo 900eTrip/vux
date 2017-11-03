@@ -13,7 +13,7 @@ export default {
     },
     format: {
       type: String,
-      default: 'mm:ss'
+      default: 'ss'
     }
   },
   created () {
