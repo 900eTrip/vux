@@ -30,13 +30,13 @@ export default {
             _this.countdown = _this.currentTime
           } else if (_this.format === 'mm:ss') {
             let mm = Math.floor(_this.currentTime / 60)
-            let ss = _this.currentTime - mm * 60
+            let ss = Math.floor(_this.currentTime - mm * 60)
             mm = mm < 10 ? '0' + mm : mm
             _this.countdown = mm + ':' + ss
           } else if (_this.format === 'hh:mm:ss') {
             let hh = Math.floor(_this.currentTime / 3600)
             let mm = Math.floor((_this.currentTime - hh * 3600) / 60)
-            let ss = _this.currentTime - mm * 60
+            let ss = Math.floor(_this.currentTime - mm * 60)
             hh = hh < 10 ? '0' + hh : hh
             mm = mm < 10 ? '0' + mm : mm
             _this.countdown = hh + ':' + mm + ':' + ss
